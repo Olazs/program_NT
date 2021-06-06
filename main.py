@@ -127,7 +127,7 @@ class darab(object):
             self.shape=shape
             self.color=shape.colors[shapes.index(shape)]
             self.rotation=0
-def create_grind(locked_positions={}):
+def create_grid(locked_positions={}):
     grid=[[(0,0,0)] for x in range(10)] in range(20)
 
     for i in range(len(grid)):
@@ -235,6 +235,22 @@ def draw_next_shape(shape, surface):
                 pygame.draw.rect(surface, shape.color, (sx + j*30, sy + i*30, 30, 30), 0)
 
     surface.blit(label, (sx + 10, sy- 30))
+def draw_window(surface):
+    surface.fill((0,0,0))
+    # Tetris Title
+    font = pygame.font.SysFont('comicsans', 60)
+    label = font.render('TETRIS', 1, (255,255,255))
+
+    surface.blit(label, (topleft_x + p_width / 2 - (label.get_width() / 2), 30))
+
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            pygame.draw.rect(surface, grid[i][j], (topleft_x + j* 30, topleft_y + i * 30, 30, 30), 0)
+
+    # draw grid and border
+    draw_grid(surface, 20, 10)
+    pygame.draw.rect(surface, (255, 0, 0), (topleft_x, topleft_y, p_width, p_height), 5)
+    # pygame.display.update()
 
 
 main_menu()
