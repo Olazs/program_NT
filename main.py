@@ -220,4 +220,21 @@ def clear_rows(grid, locked):
                 newKey = (x, y + inc)
                 locked[newKey] = locked.pop(key)
 
+def draw_next_shape(shape, surface):
+    font = pygame.font.SysFont('comicsans', 30)
+    label = font.render('Kovetkezo elem', 1, (255,255,255))
+
+    sx = topleft_x + p_width + 50
+    sy = topleft_y + p_height/2 - 100
+    format = shape.shape[shape.rotation % len(shape.shape)]
+
+    for i, line in enumerate(format):
+        row = list(line)
+        for j, column in enumerate(row):
+            if column == '0':
+                pygame.draw.rect(surface, shape.color, (sx + j*30, sy + i*30, 30, 30), 0)
+
+    surface.blit(label, (sx + 10, sy- 30))
+
+
 main_menu()
